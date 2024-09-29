@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housekeeping</title>
+    <link rel="stylesheet" href="housekeeping.css">
+</head>                                                                                                                                                        
+<body>
+    <div class="container">
+        <h1>Housekeeping</h1>
+
+        <!-- Table for Housekeeping options -->
+        <table class="housekeeping-table">
+            <tr>
+                <td>Membership</td>
+                <td>
+                    <button class="add-btn" onclick="handleAdd('Membership')">ADD</button>
+                    <button class="update-btn" onclick="handleUpdate('Membership')">UPDATE</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Books/Movies</td>
+                <td>
+                    <button class="add-btn" onclick="handleAdd('Books/Movies')">ADD</button>
+                    <button class="update-btn" onclick="handleUpdate('Books/Movies')">UPDATE</button>
+                </td>
+            </tr>
+            <tr>
+                <td>User Management</td>
+                <td>
+                    <button class="add-btn" onclick="handleAdd('User Management')">ADD</button>
+                    <button class="update-btn" onclick="handleUpdate('User Management')">UPDATE</button>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Back, Home, and Log Out buttons -->
+        <button class="back-btn" onclick="goBack()">Back</button>
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for navigation and button functionality -->
+    <script>
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+
+        function redirectHome() {
+            // Redirect to the user's home page (admin/user dashboard)
+            const userType = sessionStorage.getItem('userType');
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Admin dashboard
+            } else {
+                window.location.href = 'user-dashboard.html'; // User dashboard
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+
+        function handleAdd(type) {
+            switch(type) {
+                case 'Membership':
+                    window.location.href = 'add-membership.html'; // Redirect to Membership ADD page
+                    break;
+                case 'Books/Movies':
+                    window.location.href = 'add-books-movies.html'; // Redirect to Books/Movies ADD page
+                    break;
+                case 'User Management':
+                    window.location.href = 'add-user-management.html'; // Redirect to User Management ADD page
+                    break;
+            }
+        }
+
+        function handleUpdate(type) {
+            switch(type) {
+                case 'Membership':
+                    window.location.href = 'update-membership.html'; // Redirect to Membership UPDATE page
+                    break;
+                case 'Books/Movies':
+                    window.location.href = 'update-books-movies.html'; // Redirect to Books/Movies UPDATE page
+                    break;
+                case 'User Management':
+                    window.location.href = 'update-user-management.html'; // Redirect to User Management UPDATE page
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User Management</title>
+    <link rel="stylesheet" href="add-books-movies.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add User Management</h1>
+
+        <!-- Left sidebar for clickable options -->
+        <div class="sidebar">
+            <table class="sidebar-table">
+                <tr>
+                    <td>Membership</td>
+                    <td>
+                        <button class="add-btn" onclick="handleRedirect('add-membership.html')">ADD</button>
+                        <button class="update-btn" onclick="handleRedirect('update-membership.html')">UPDATE</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Books/Movies</td>
+                    <td>
+                        <button class="add-btn" onclick="handleRedirect('add-books-movies.html')">ADD</button>
+                        <button class="update-btn" onclick="handleRedirect('update-books-movies.html')">UPDATE</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>User Management</td>
+                    <td>
+                        <button class="add-btn" onclick="handleRedirect('add-user-management.html')">ADD</button>
+                        <button class="update-btn" onclick="handleRedirect('update-user-management.html')">UPDATE</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <h2>Add User Management</h2>
+
+            <!-- Table for Add Books/Movies form -->
+            <form id="addBooksMoviesForm" onsubmit="return validateForm()">
+                <table class="form-table">
+                    <tr>
+                        <td>
+                            <input type="radio" id="new-user" name="user-type" value="new" checked>
+                            <label for="new-user">New User</label>
+
+                        </td>
+                        <td>
+                            <input type="radio" id="existing-user" name="user-type" value="existing">
+                            <label for="existing-user">Existing User</label>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td><input type="text" id="name" required></td>
+
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>
+                            <input type="checkbox" id="active" value="active">
+                            <label for="active">Active</label>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>Admin</td>
+                        <td>
+                            <input type="checkbox" id="admin" value="admin">
+                            <label for="admin">Admin</label>
+                        </td>
+
+                    </tr>
+                </table>
+
+                <!-- Form buttons -->
+                <div class="button-container">
+                    <button type="submit" class="submit-btn">Confirm</button>
+                    <button type="button" class="cancel-btn" onclick="cancelForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Home and Log Out buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for navigation and form validation -->
+    <script>
+        function handleRedirect(page) {
+            window.location.href = page; // Redirect to the respective page
+        }
+
+        function redirectHome() {
+            const userType = sessionStorage.getItem('userType'); // Get the user type from sessionStorage
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Redirect to Admin dashboard
+            } else if (userType === 'user') {
+                window.location.href = 'user-dashboard.html'; // Redirect to User dashboard
+            } else {
+                alert("User type not found! Redirecting to login page.");
+                window.location.href = 'index.html'; // Fallback to login if userType is not set
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'logout-success.html'; // Redirect to the log out success page
+        }
+
+        function cancelForm() {
+            window.location.href = 'cancel-confirmation.html'; // Redirect to a cancel confirmation page
+        }
+
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const procurementDate = document.getElementById('procurementDate').value;
+            const quantity = document.getElementById('quantity').value;
+
+            // Check if all fields are filled
+            if (name === "" || procurementDate === "" || quantity === "") {
+                alert('Please fill all the required fields.');
+                return false;
+            }
+
+            return true; // Proceed with form submission if all fields are valid
+        }
+    </script>
+</body>
+</html>

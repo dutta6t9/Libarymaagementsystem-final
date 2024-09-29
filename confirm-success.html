@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Successful</title>
+    <link rel="stylesheet" href="confirm-sucess.css">
+</head>
+<body>
+    <div class="container">
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+        <div class="message-container">
+            <h2 id="transaction-message">Transaction completed successfully.</h2>
+            <h2 id="welcome-message" style="display:none;">Welcome!</h2>
+        </div>
+    </div>
+
+    <script>
+        // Display transaction message for 5 seconds
+        setTimeout(() => {
+            document.getElementById('transaction-message').style.display = 'none';
+            document.getElementById('welcome-message').style.display = 'block';
+        }, 5000);
+
+        // Display welcome message for 2 seconds and redirect to login page
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 7000);
+
+        function redirectHome() {
+            // Home button functionality
+        }
+
+        function logout() {
+            // Logout functionality
+        }
+    </script>
+</body>
+</html>
+
+

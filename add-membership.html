@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Membership</title>
+    <link rel="stylesheet" href="add-membership.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Membership</h1>
+
+        <!-- Left sidebar for clickable options -->
+        <div class="sidebar">
+            <table class="sidebar-table">
+                <tr>
+                    <td>Membership</td>
+                    <td>
+                        <button class="add-btn" onclick="handleRedirect('add-membership.html')">ADD</button>
+                        <button class="update-btn" onclick="handleRedirect('update-membership.html')">UPDATE</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Books/Movies</td>
+                    <td>
+                        <button class="add-btn" onclick="handleRedirect('add-books-movies.html')">ADD</button>
+                        <button class="update-btn" onclick="handleRedirect('update-books-movies.html')">UPDATE</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>User Management</td>
+                    <td>
+                        <button class="add-btn" onclick="handleRedirect('add-user-management.html')">ADD</button>
+                        <button class="update-btn" onclick="handleRedirect('update-user-management.html')">UPDATE</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <h2>Add Membership</h2>
+
+            <!-- Table for Add Membership form -->
+            <form id="addMembershipForm" onsubmit="return handleConfirm()">
+                <table class="form-table">
+                    <tr>
+                        <td>First Name</td>
+                        <td><input type="text" id="firstName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Last Name</td>
+                        <td><input type="text" id="lastName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Contact Name</td>
+                        <td><input type="text" id="contactName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Contact Address</td>
+                        <td><input type="text" id="contactAddress" required></td>
+                    </tr>
+                    <tr>
+                        <td>Adhar Card No</td>
+                        <td><input type="text" id="adharNo" required></td>
+                    </tr>
+                    <tr>
+                        <td>Start Date</td>
+                        <td><input type="date" id="startDate" required></td>
+                    </tr>
+                    <tr>
+                        <td>End Date</td>
+                        <td><input type="date" id="endDate" required></td>
+                    </tr>
+                    <tr>
+                        <td>Membership</td>
+                        <td>
+                            <input type="radio" id="sixMonth" name="membership" value="Six Month" required> Six Month<br>
+                            <input type="radio" id="oneYear" name="membership" value="One Year"> One Year<br>
+                            <input type="radio" id="twoYear" name="membership" value="Two Year"> Two Year
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Form buttons -->
+                <div class="button-container">
+                    <button type="submit" class="submit-btn">Confirm</button>
+                    <button type="button" class="cancel-btn" onclick="cancelForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Home and Log Out buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for navigation and form validation -->
+    <script>
+        function handleRedirect(page) {
+            window.location.href = page; // Redirect to the respective page
+        }
+
+        function redirectHome() {
+            const userType = sessionStorage.getItem('userType'); // Get the user type from sessionStorage
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Redirect to Admin dashboard
+            } else if (userType === 'user') {
+                window.location.href = 'user-dashboard.html'; // Redirect to User dashboard
+            } else {
+                alert("User type not found! Redirecting to login page.");
+                window.location.href = 'index.html'; // Fallback to login if userType is not set
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'logout-success.html'; // Redirect to the log out success page
+        }
+
+        function cancelForm() {
+            window.location.href = 'cancel-confirmation.html'; // Redirect to a cancel confirmation page
+        }
+
+        function handleConfirm() {
+            const membership = document.querySelector('input[name="membership"]:checked');
+            if (!membership) {
+                alert('Please select a membership option.');
+                return false;
+            }
+            window.location.href = 'confirm-success.html'; // Redirect to the confirmation success page after valid form submission
+            return false; // Prevent default form submission behavior
+        }
+    </script>
+</body>
+</html>
